@@ -1,0 +1,5 @@
+{
+  "name": "hutulia/pagination",
+  "description": "Work with abstract pagination by php",
+  "type": "library"
+}
