@@ -1,7 +1,9 @@
 <?php
 
+use Exception;
 use Hutulia\Pagination\Pagination;
 use PHPUnit\Framework\TestCase;
+
 
 class PaginationTest extends TestCase
 {
@@ -38,5 +40,23 @@ class PaginationTest extends TestCase
         $this->assertSame($totalOnCurrentPage, $fixture->getTotalOnCurrentPage());
         $this->assertSame($start, $fixture->getStart());
         $this->assertSame($end, $fixture->getEnd());
+    }
+
+    public function testCreateWithIncorrectTotal()
+    {
+        $this->expectException(Exception::class);
+        new Pagination(-1, 1, 1);
+    }
+
+    public function testCreateWithIncorrectPerPage()
+    {
+        $this->expectException(Exception::class);
+        new Pagination(1, -1, 1);
+    }
+
+    public function testCreateWithIncorrectCurrentPage()
+    {
+        $this->expectException(Exception::class);
+        new Pagination(1, 1, -1);
     }
 }
