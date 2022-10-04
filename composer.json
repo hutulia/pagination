@@ -2,6 +2,7 @@
   "name": "hutulia/pagination",
   "description": "Work with abstract pagination by php",
   "type": "library",
+  "license": "MIT",
   "autoload": {
     "psr-4": {
       "Hutulia\\Pagination\\": "src/"
