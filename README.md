@@ -58,5 +58,24 @@ echo $pagination->getTotalPages();
 // 4
 ```
 
+## Available vars for render & public methods
+You can use any of these vars in template string: `{VAR_NAME}`, example: `{TOTAL}`.
+
+Every property has its public getter: `$pagination->getPropName()`, example: `$pagination->getTotal()`.
+
+Here is how supported render vars are created :
+
+```
+'TOTAL'                 => $this->getTotal(),
+'PER_PAGE'              => $this->getPerPage(),
+'TOTAL_PAGES'           => $this->getTotalPages(),
+'CURRENT_PAGE'          => $this->getCurrentPage(),
+'IS_START_PAGE'         => (int) $this->isStartPage(),
+'IS_END_PAGE'           => (int) $this->isEndPage(),
+'TOTAL_ON_CURRENT_PAGE' => $this->getTotalOnCurrentPage(),
+'START'                 => $this->getStart(),
+'END'                   => $this->getEnd(),
+```
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
