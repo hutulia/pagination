@@ -1,5 +1,10 @@
 {
   "name": "hutulia/pagination",
   "description": "Work with abstract pagination by php",
-  "type": "library"
+  "type": "library",
+  "autoload": {
+    "psr-4": {
+      "Hutulia\\Pagination\\": "src/"
+    }
+  }
 }
