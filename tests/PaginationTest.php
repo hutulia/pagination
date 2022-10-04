@@ -15,7 +15,14 @@ class PaginationTest extends TestCase
      *           [2,1,2,2,false,true,1,2,2]
      *           [3,2,1,2,true,false,2,1,2]
      *           [3,2,2,2,false,true,1,3,3]
+     *           [10,1,1,10,true,false,1,1,1]
+     *           [10,1,2,10,false,false,1,2,2]
+     *           [10,1,10,10,false,true,1,10,10]
+     *           [10,10,1,1,true,true,10,1,10]
      *           [10,3,2,4,false,false,3,4,6]
+     *           [10,3,4,4,false,true,1,10,10]
+     *           [11,10,2,2,false,true,1,11,11]
+     *           [12,10,2,2,false,true,2,11,12]
      * @throws Exception
      */
     public function testPagination($total,
@@ -58,5 +65,21 @@ class PaginationTest extends TestCase
     {
         $this->expectException(Exception::class);
         new Pagination(1, 1, -1);
+    }
+
+    public function testRendering()
+    {
+        $fixture = new Pagination(10, 3, 4);
+        $renderVars = $fixture->getRenderVars();
+        $varNames = array_keys($renderVars);
+        $varsAsTemplateString = array_map(function($varName){
+            return '{'.$varName.'}';
+        }, $varNames);
+
+        $template = implode('|', $varsAsTemplateString);
+        //> var_dump($testTemplate);
+        //< {TOTAL}|{PER_PAGE}|{TOTAL_PAGES}|{CURRENT_PAGE}|{IS_START_PAGE}|{IS_END_PAGE}|{TOTAL_ON_CURRENT_PAGE}|{START}|{END}
+        //var_dump($fixture);
+        $this->assertSame('10|3|4|4|0|1|1|10|10', $fixture->render($template));
     }
 }
