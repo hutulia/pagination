@@ -2,27 +2,43 @@
 
 namespace Hutulia\Pagination;
 
+use Exception;
+
 class Pagination
 {
     /** @var int */
     protected $total = 0;
 
+    /** @var int */
     protected $perPage = 10;
 
+    /** @var int */
     protected $totalPages = 1;
 
+    /** @var int */
     protected $currentPage = 1;
 
+    /** @var bool */
     protected $isStartPage = false;
 
+    /** @var bool */
     protected $isEndPage = false;
 
+    /** @var int */
     protected $totalOnCurrentPage = 0;
 
+    /** @var int */
     protected $start = 0;
 
+    /** @var int */
     protected $end = 0;
 
+    /**
+     * @param int $total
+     * @param int $perPage
+     * @param int $currentPage
+     * @throws Exception
+     */
     public function __construct($total = 0, $perPage = 10, $currentPage = 1)
     {
         $this->setTotal($total)
@@ -33,8 +49,7 @@ class Pagination
             ->setIsEndPage($this->calcIsEndPage())
             ->setTotalOnCurrentPage($this->calcTotalOnCurrentPage())
             ->setStart($this->calcStart())
-            ->setEnd($this->calcEnd())
-        ;
+            ->setEnd($this->calcEnd());
     }
 
     /**
@@ -70,6 +85,22 @@ class Pagination
     }
 
     /**
+     * @return bool
+     */
+    public function isStartPage(): bool
+    {
+        return $this->isStartPage;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEndPage(): bool
+    {
+        return $this->isEndPage;
+    }
+
+    /**
      * @return int
      */
     public function getTotalOnCurrentPage()
@@ -98,7 +129,11 @@ class Pagination
      */
     public function calcTotalPages()
     {
-        return ceil($this->totalPages/$this->perPage);
+        if($this->total == 0){
+            return 1;
+        }
+
+        return (int) ceil($this->total / $this->perPage);
     }
 
     /**
@@ -106,15 +141,13 @@ class Pagination
      */
     public function calcTotalOnCurrentPage()
     {
-        return $this->currentPage !== $this->totalPages ? $this->perPage : ($this->total % $this->perPage);
-    }
+        if($this->total == 0){
+            return 0;
+        }
 
-    /**
-     * @return bool
-     */
-    public function calcIsEndPage()
-    {
-        return $this->currentPage === $this->totalPages;
+        return $this->currentPage !== $this->totalPages
+            ? $this->perPage
+            : ($this->perPage - $this->total % $this->perPage);
     }
 
     /**
@@ -126,10 +159,22 @@ class Pagination
     }
 
     /**
+     * @return bool
+     */
+    public function calcIsEndPage()
+    {
+        return $this->currentPage === $this->totalPages;
+    }
+
+    /**
      * @return int
      */
     public function calcStart()
     {
+        if($this->total === 0){
+            return 0;
+        }
+
         return ($this->currentPage - 1) * $this->perPage + 1;
     }
 
@@ -142,52 +187,98 @@ class Pagination
     }
 
     /**
-     * @param $total
      * @return $this
+     * @throws Exception
      */
     protected function setTotal($total)
     {
+        $total = (int) $total;
+
+        if ($total < 0) {
+            throw new Exception('total < 0');
+        }
+
         $this->total = $total;
+
         return $this;
     }
 
     /**
-     * @param int $perPage
      * @return $this
+     * @throws Exception
      */
     protected function setPerPage($perPage)
     {
+        $perPage = (int) $perPage;
+
+        if ($perPage < 1) {
+            throw new Exception('perPage < 1');
+        }
+
         $this->perPage = $perPage;
+
         return $this;
     }
 
     /**
-     * @param $totalPages
+     * @param int $totalPages
      * @return $this
+     * @throws Exception
      */
     protected function setTotalPages($totalPages)
     {
+        $totalPages = (int) $totalPages;
+
+        if ($totalPages < 1) {
+            throw new Exception('totalPages < 1');
+        }
+
         $this->totalPages = $totalPages;
+
         return $this;
     }
 
     /**
-     * @param int $currentPage
+     * @param $currentPage
      * @return $this
+     * @throws Exception
      */
     protected function setCurrentPage($currentPage)
     {
+        $currentPage = (int) $currentPage;
+
+        if ($currentPage < 1) {
+            throw new Exception('currentPage < 1');
+        }
+
+        if ($currentPage > $this->totalPages) {
+            throw new Exception('currentPage > totalPages');
+        }
+
         $this->currentPage = $currentPage;
+
         return $this;
     }
 
     /**
      * @param $totalOnCurrentPage
      * @return $this
+     * @throws Exception
      */
     protected function setTotalOnCurrentPage($totalOnCurrentPage)
     {
+        $totalOnCurrentPage = (int) $totalOnCurrentPage;
+
+        if ($totalOnCurrentPage < 0) {
+            throw new Exception('totalOnCurrentPage < 0');
+        }
+
+        if ($totalOnCurrentPage > $this->perPage) {
+            throw new Exception('totalOnCurrentPage > perPage');
+        }
+
         $this->totalOnCurrentPage = $totalOnCurrentPage;
+
         return $this;
     }
 
@@ -197,7 +288,8 @@ class Pagination
      */
     protected function setIsEndPage($isEndPage)
     {
-        $this->isEndPage = $isEndPage;
+        $this->isEndPage = (bool) $isEndPage;
+
         return $this;
     }
 
@@ -207,7 +299,8 @@ class Pagination
      */
     protected function setIsStartPage($isStartPage)
     {
-        $this->isStartPage = $isStartPage;
+        $this->isStartPage = (bool) $isStartPage;
+
         return $this;
     }
 
@@ -217,7 +310,10 @@ class Pagination
      */
     protected function setStart($start)
     {
+        $start = (int) $start;
+
         $this->start = $start;
+
         return $this;
     }
 
@@ -227,7 +323,10 @@ class Pagination
      */
     protected function setEnd($end)
     {
+        $end = (int) $end;
+
         $this->end = $end;
+
         return $this;
     }
 }
