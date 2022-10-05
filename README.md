@@ -39,10 +39,14 @@ echo $pagination->getTotalPages();
 // 4
 ```
 
+### Example 2: Simple renderer
+
+Basic simple rendering functionality
 
 ```php
 
 use Hutulia\Pagination\Pagination;
+use Hutulia\Pagination\SimpleRenderer;
 
 require_once 'vendor/autoload.php';
 
@@ -50,15 +54,12 @@ $totalItems  = 11;
 $perPage     = 3;
 $currentPage = 2;
 $pagination  = new Pagination($totalItems, $perPage, $currentPage);
+$renderer    = new SimpleRenderer($pagination);
+$template    = 'Showing {START} - {END} of {TOTAL}. Page {CURRENT_PAGE} of {TOTAL_PAGES}';
 
-$template = 'Showing {START} - {END} of {TOTAL}. Page {CURRENT_PAGE} of {TOTAL_PAGES}';
-
-echo $pagination->render($template);
+echo $renderer->render($template);
 // Showing 4 - 6 of 11. Page 2 of 4
 ```
-
-### Example 2
-
 
 ## Available vars for render & public methods
 You can use any of these vars in template string: `{VAR_NAME}`, example: `{TOTAL}`.
