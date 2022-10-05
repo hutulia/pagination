@@ -1,8 +1,3 @@
-
-# Project Title
-
-A brief description of what this project does and who it's for
-
 # Hutulia/Pagination
 
 Work with abstract pagination by php
@@ -170,6 +165,7 @@ e
 - If pagination can't constructed than Exception will be thrown. For example, if we try to use currentPage that is greater than maximum available page number
 
 <a name="installation"/>
+
 ## Installation
 
 ```bash
