@@ -53,39 +53,6 @@ class Pagination
     }
 
     /**
-     * @param string $template
-     * @return string
-     */
-    public function render($template = '')
-    {
-        $vars = $this->getRenderVars();
-
-        foreach ($vars as $varName => $varValue) {
-            $template = str_replace('{'.$varName.'}', $varValue, $template);
-        }
-
-        return $template;
-    }
-
-    /**
-     * @return array
-     */
-    public function getRenderVars()
-    {
-        return [
-            'TOTAL'                 => $this->getTotal(),
-            'PER_PAGE'              => $this->getPerPage(),
-            'TOTAL_PAGES'           => $this->getTotalPages(),
-            'CURRENT_PAGE'          => $this->getCurrentPage(),
-            'IS_START_PAGE'         => (int) $this->isStartPage(),
-            'IS_END_PAGE'           => (int) $this->isEndPage(),
-            'TOTAL_ON_CURRENT_PAGE' => $this->getTotalOnCurrentPage(),
-            'START'                 => $this->getStart(),
-            'END'                   => $this->getEnd(),
-        ];
-    }
-
-    /**
      * @return int
      */
     public function getTotal()
