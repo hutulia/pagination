@@ -136,6 +136,7 @@ composer require hutulia/pagination
 ### Example 1: Just work with pagination programmatically
 
 ```php
+<?php
 
 use Hutulia\Pagination\Pagination;
 
@@ -167,6 +168,7 @@ echo $pagination->getTotalPages();
 Basic simple rendering functionality. See reference for more.
 
 ```php
+<?php
 
 use Hutulia\Pagination\Pagination;
 use Hutulia\Pagination\SimpleRenderer;
@@ -182,6 +184,49 @@ $template    = 'Showing {START} - {END} of {TOTAL}. Page {CURRENT_PAGE} of {TOTA
 
 echo $renderer->render($template);
 // Showing 4 - 6 of 11. Page 2 of 4
+```
+
+### Example 3: Export To Plain Object
+
+```php
+
+<?php
+
+use Hutulia\Pagination\Pagination;
+use Hutulia\Pagination\ExporterToPlainObject;
+
+require_once 'vendor/autoload.php';
+
+$total                 = 5;
+$perPage               = 3;
+$currentPage           = 1;
+$pagination            = new Pagination($total, $perPage, $currentPage);
+$exporterToPlainObject = new ExporterToPlainObject($pagination);
+
+var_dump($exporterToPlainObject->export());
+
+/*
+object(stdClass)#4 (9) {
+  ["total"]=>
+  int(5)
+  ["perPage"]=>
+  int(3)
+  ["totalPages"]=>
+  int(2)
+  ["currentPage"]=>
+  int(1)
+  ["isStartPage"]=>
+  bool(true)
+  ["isEndPage"]=>
+  bool(false)
+  ["totalOnCurrentPage"]=>
+  int(3)
+  ["start"]=>
+  int(1)
+  ["end"]=>
+  int(3)
+}
+*/
 ```
 
 ## Reference
