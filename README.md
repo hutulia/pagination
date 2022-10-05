@@ -1,6 +1,8 @@
 # Hutulia/Pagination
 
-Work with abstract pagination by php
+Work with abstract pagination by php.
+
+The idea is to have the pagination calculations in separated unit. So that unit has just one responsibility - to calculate the pagination data. That data is abstract, so can be used with any type of items.
 
 ## Table of contents
 [Description](#description)
@@ -158,7 +160,6 @@ e
 <a name="some-implementation-details"/>
 
 ### Some implementation details
-- The idea is to have the pagination calculations in separated unit. So that unit has just one responsibility - to calculate the pagination data. That data is abstract, so can used with any type of items
 - Pagination can have no items
 - Pagination always has at least 1 page (even if there is no items)
 - Fields of pagination object stores the data about all the set and the current page. See reference.
