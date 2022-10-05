@@ -25,9 +25,9 @@ Work with abstract pagination by php
 
 - [Pagination](#reference-pagination)
 
-- [Properties](#reference-pagination-properties)
+    - [Properties](#reference-pagination-properties)
 
-- [API](#reference-pagination-api)
+    - [API](#reference-pagination-api)
 
 - [SimpleRenderer API](#reference-simplerenderer-api)
 
