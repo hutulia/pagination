@@ -32,9 +32,9 @@
 
     - [API](#reference-pagination-api)
 
-- [Hutulia\Pagination\SimpleRenderer](#reference-simplerenderer-api)
+- [Hutulia\Pagination\SimpleRenderer](#reference-simplerenderer)
 
-- [Hutulia\Pagination\ExporterToPlainObject](#reference-exporter-to-plain-object-api)
+- [Hutulia\Pagination\ExporterToPlainObject](#reference-exporter-to-plain-object)
 
 <a name="get-started"/>
 
@@ -365,6 +365,8 @@ e
 - getTotalOnCurrentPage()
 - getStart()
 - getEnd()
+- render($template) : string . See [Hutulia\Pagination\SimpleRenderer reference](#reference-simplerenderer). It is used inside.
+- toPlainObject() : \stdClass . See [Hutulia\Pagination\ExporterToPlainObject reference](#reference-exporter-to-plain-object). It is used inside.
 
 Used during construct but can be used after (they do not change the object)
 - calcTotalPages()
@@ -374,8 +376,7 @@ Used during construct but can be used after (they do not change the object)
 - calcStart()
 - calcEnd()
 
-<a name="reference-simplerenderer-api"/>
-
+<a name="reference-simplerenderer"/>
 
 ### Hutulia\Pagination\SimpleRenderer
 
@@ -400,7 +401,7 @@ Available vars:
 | `START` | `int` | The total position of the first item on current page. Numbers are starting from 1 (not 0) |
 | `END` | `int` | The total position of the last item on current page. Is equals to TOTAL on last page. |
 
-<a name="reference-exporter-to-plain-object-api"/>
+<a name="reference-exporter-to-plain-object"/>
 
 ### Hutulia\Pagination\ExporterToPlainObject
 
