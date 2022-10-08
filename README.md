@@ -58,7 +58,7 @@ Imagine that we need to show them all to user, but we can show max 3 at once. So
 
 ######  We will produce (displaying by 3 items per page)
 
-```php
+```
 Show page: 1
 a
 b
@@ -71,7 +71,7 @@ e
 
 ###### And we will have objects like this (pseudocode):
 
-```php
+```
 //page 1
 
 pagination {
@@ -87,7 +87,7 @@ pagination {
 }
 ```
 
-```php
+```
 //page 2
 
 pagination {
