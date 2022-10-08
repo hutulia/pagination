@@ -2,7 +2,7 @@
 
 | Input | Output |Pagination object for page 1 | Pagination object for page 2 |
 | :-------- | :------- | :------------------------- | :------------------------- |
-| <pre>['a', 'b', 'c', 'd', 'e']</pre>|<pre>Show page: 1<br>a<br>b<br>c<br><br>Show page: 2<br>d<br>e<br><br></pre>|<pre>object {<br>  total              : 5<br>  perPage            : 3<br>  totalPages         : 2<br>  currentPage        : 1<br>  isStartPage        : true<br>  isEndPage          : false<br>  totalOnCurrentPage : 3<br>  start              : 1<br>  end                : 3<br>}</pre>|<pre>object {<br>  total              : 5<br>  perPage            : 3<br>  totalPages         : 2<br>  currentPage        : 2<br>  isStartPage        : false<br>  isEndPage          : true<br>  totalOnCurrentPage : 2<br>  start              : 4<br>  end                : 5<br>}</pre>|
+| <pre>['a', 'b', 'c', 'd', 'e']</pre>|<pre>Page: 1<br>a<br>b<br>c<br><br>Page: 2<br>d<br>e<br><br></pre>|<pre>object {<br>  total              : 5<br>  perPage            : 3<br>  totalPages         : 2<br>  currentPage        : 1<br>  isStartPage        : true<br>  isEndPage          : false<br>  totalOnCurrentPage : 3<br>  start              : 1<br>  end                : 3<br>}</pre>|<pre>object {<br>  total              : 5<br>  perPage            : 3<br>  totalPages         : 2<br>  currentPage        : 2<br>  isStartPage        : false<br>  isEndPage          : true<br>  totalOnCurrentPage : 2<br>  start              : 4<br>  end                : 5<br>}</pre>|
 
 <a name="table-of-contents"/>
 
@@ -59,12 +59,12 @@ Imagine that we need to show them all to user, but we can show max 3 at once. So
 ######  We will produce (displaying by 3 items per page)
 
 ```
-Show page: 1
+Page: 1
 a
 b
 c
 
-Show page: 2
+Page: 2
 d
 e
 ```
@@ -274,7 +274,7 @@ object {
 
 // Now $pagination has all needed information and we can display page 1 some like this:
 
-echo "Show page: {$pagination->getCurrentPage()}".PHP_EOL;
+echo "Page: {$pagination->getCurrentPage()}".PHP_EOL;
 
 $i = $pagination->getStart();
 
@@ -290,7 +290,7 @@ echo PHP_EOL;
 
 // For now, we will have such output:
 /*
-Show page: 1
+Page: 1
 a
 b
 c
@@ -302,7 +302,7 @@ c
 $currentPage = 2;
 $pagination  = new Pagination($total, $perPage, $currentPage);
 
-echo "Show page: {$pagination->getCurrentPage()}".PHP_EOL;
+echo "Page: {$pagination->getCurrentPage()}".PHP_EOL;
 
 $i = $pagination->getStart();
 
@@ -316,12 +316,12 @@ while($i <= $pagination->getEnd()){
 
 //For now, we will have total output:
 /*
-Show page: 1
+Page: 1
 a
 b
 c
 
-Show page: 2
+Page: 2
 d
 e
 
