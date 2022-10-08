@@ -189,6 +189,14 @@ class Pagination
     }
 
     /**
+     * @param string $template See SimpleRenderer::render()
+     * @return string
+     */
+    public function render($template){
+        return (new SimpleRenderer($this))->render($template);
+    }
+
+    /**
      * @return $this
      * @throws Exception
      */

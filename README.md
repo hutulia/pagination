@@ -18,7 +18,7 @@
 
 - [Example 1: Just work with pagination programmatically](#example-just-work-with-pagination-programmatically)
 
-- [Example 2: Simple renderer](#example-simple-renderer)
+- [Example 2: Render](#example-render)
 
 - [Example 3: Export To Plain Object](#example-export-to-plain-object)
 
@@ -158,11 +158,9 @@ echo $pagination->getTotalPages();
 // 4
 ```
 
-<a name="example-simple-renderer"/>
+<a name="example-render"/>
 
-### Example 2: Simple renderer
-
-Basic simple rendering functionality. See reference for more.
+### Example 2: Render
 
 ```php
 <?php
@@ -181,7 +179,13 @@ $template    = 'Showing {START} - {END} of {TOTAL}. Page {CURRENT_PAGE} of {TOTA
 
 echo $renderer->render($template);
 // Showing 4 - 6 of 11. Page 2 of 4
+
+//Or without SimpleRenderer - will do exactly same inside
+
+echo $pagination->render($template);
+// Showing 4 - 6 of 11. Page 2 of 4
 ```
+
 
 <a name="example-export-to-plain-object"/>
 
