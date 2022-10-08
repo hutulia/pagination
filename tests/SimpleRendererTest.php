@@ -1,6 +1,5 @@
 <?php
 
-use Exception;
 use Hutulia\Pagination\Pagination;
 use Hutulia\Pagination\SimpleRenderer;
 use PHPUnit\Framework\TestCase;
@@ -12,7 +11,7 @@ class SimpleRendererTest extends TestCase
      *           [12,5,2,"12|5|3|2|0|0|5|6|10"]
      *           [12,5,3,"12|5|3|3|0|1|2|11|12"]
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function testRendering($total, $perPage, $currentPage, $renderedString)
     {

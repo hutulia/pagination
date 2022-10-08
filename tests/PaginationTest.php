@@ -1,6 +1,5 @@
 <?php
 
-use Exception;
 use Hutulia\Pagination\Pagination;
 use Hutulia\Pagination\SimpleRenderer;
 use PHPUnit\Framework\TestCase;
@@ -23,7 +22,7 @@ class PaginationTest extends TestCase
      *           [10,3,4,4,false,true,1,10,10]
      *           [11,10,2,2,false,true,1,11,11]
      *           [12,10,2,2,false,true,2,11,12]
-     * @throws Exception
+     * @throws \Exception
      */
     public function testPagination($total,
                                    $perPage,
@@ -54,7 +53,7 @@ class PaginationTest extends TestCase
      *           [12,5,2,"12|5|3|2|0|0|5|6|10"]
      *           [12,5,3,"12|5|3|3|0|1|2|11|12"]
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function testRender($total, $perPage, $currentPage, $renderedString)
     {
@@ -91,7 +90,7 @@ class PaginationTest extends TestCase
      *           [10,3,4,4,false,true,1,10,10]
      *           [11,10,2,2,false,true,1,11,11]
      *           [12,10,2,2,false,true,2,11,12]
-     * @throws Exception
+     * @throws \Exception
      */
     public function testExportToPlainObject(
         $total,
@@ -123,19 +122,19 @@ class PaginationTest extends TestCase
 
     public function testCreateWithIncorrectTotal()
     {
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
         new Pagination(-1, 1, 1);
     }
 
     public function testCreateWithIncorrectPerPage()
     {
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
         new Pagination(1, -1, 1);
     }
 
     public function testCreateWithIncorrectCurrentPage()
     {
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
         new Pagination(1, 1, -1);
     }
 }

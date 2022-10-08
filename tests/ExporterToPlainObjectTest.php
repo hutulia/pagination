@@ -1,6 +1,5 @@
 <?php
 
-use Exception;
 use Hutulia\Pagination\ExporterToPlainObject;
 use Hutulia\Pagination\Pagination;
 use PHPUnit\Framework\TestCase;
@@ -25,7 +24,7 @@ class ExporterToPlainObjectTest extends TestCase
      *           [10,3,4,4,false,true,1,10,10]
      *           [11,10,2,2,false,true,1,11,11]
      *           [12,10,2,2,false,true,2,11,12]
-     * @throws Exception
+     * @throws \Exception
      */
     public function testExport(
         $total,
