@@ -110,6 +110,7 @@ See [Full get started example](#full-get-started-example) with real working code
 ### Implementation details
 - Pagination can have no items
 - Pagination always has at least 1 page (even if there is no items)
+- Items numbers starting from 1
 - Fields of pagination object stores the data about all the set and the current page. See reference.
 - If pagination can't be constructed - Exception will be thrown. For example, if we try to use currentPage that is greater than maximum available page number
 
