@@ -1,19 +1,14 @@
 # Hutulia/Pagination
 
-Work with abstract pagination by php.
-
-The idea is to have the pagination calculations in separated unit. So that unit has just one responsibility - to calculate the pagination data. That data is abstract, so can be used with any type of items.
+<a name="table-of-contents"/>
 
 ## Table of contents
-[Description](#description)
 
-- [Quick descriptive example](#quick-descriptive-example)
+[Get Started](#get-started)
 
-- [Full descriptive example](#full-descriptive-example)
+[Implementation details](#implementation-details)
 
-[Some implementation details](#some-implementation-details)
-
-[Installation](#installation)
+[Install](#install)
 
 [Usage](#usage)
 
@@ -23,36 +18,41 @@ The idea is to have the pagination calculations in separated unit. So that unit 
 
 - [Example 3: Export To Plain Object](#example-export-to-plain-object)
 
+- [Example 4: Full get started example](#full-get-started-example)
+
 [Reference](#reference)
 
-- [Pagination](#reference-pagination)
+- [Hutulia\Pagination\Pagination](#reference-pagination)
 
     - [Properties](#reference-pagination-properties)
 
     - [API](#reference-pagination-api)
 
-- [SimpleRenderer API](#reference-simplerenderer-api)
+- [Hutulia\Pagination\SimpleRenderer](#reference-simplerenderer-api)
 
-- [ExporterToPlainObject API](#reference-exporter-to-plain-object-api)
+- [Hutulia\Pagination\ExporterToPlainObject](#reference-exporter-to-plain-object-api)
 
-<a name="description"/>
+<a name="get-started"/>
 
-## Description
-Imagine we have a set of element: `['a', 'b', 'c', 'd', 'e']`.
+## Get Started
 
-We need to show them all to user, but we can show max 3 at once.
- So we use pagination to determine which elements when to show.
+Work with abstract pagination by php.
 
-<a name="quick-descriptive-example"/>
+The idea is to have a class (pagination) that is responsible just for calculate the pagination data. That data is abstract, so can be used with any type of items.
 
-### Quick descriptive example
+<a name="get-started-example"/>
 
-#### We have
+##### Get started example
+
+###### We have
+
 ```php
 ['a', 'b', 'c', 'd', 'e']
 ```
 
-#### We will produce (display the set by 3 items per page)
+Imagine that we need to show them all to user, but we can show max 3 at once. So we use pagination to determine which elements when to show.
+
+######  We will produce (displaying by 3 items per page)
 
 ```php
 Show page: 1
@@ -65,29 +65,12 @@ d
 e
 ```
 
-<a name="full-descriptive-example"/>
-
-### Full descriptive example:
+###### And we will have objects like this (pseudocode):
 
 ```php
-<?php
+//page 1
 
-use Hutulia\Pagination\Pagination;
-
-require_once 'vendor/autoload.php';
-
-$items       = ['a', 'b', 'c', 'd', 'e'];
-$total       = count($items);
-$perPage     = 3;
-$currentPage = 1;
-$pagination  = new Pagination($total, $perPage, $currentPage);
-
-//var_dump($pagination);
-
-/*
-Output is simplified:
-
-object {
+pagination {
   total              : 5
   perPage            : 3
   totalPages         : 2
@@ -98,76 +81,37 @@ object {
   start              : 1
   end                : 3
 }
-*/
-
-// Now $pagination has all needed information and we can display page 1 some like this:
-
-echo "Show page: {$pagination->getCurrentPage()}".PHP_EOL;
-
-$i = $pagination->getStart();
-
-while($i <= $pagination->getEnd()){
-    $index = $i-1;
-
-    echo $items[$index].PHP_EOL;
-
-    $i++;
-}
-
-echo PHP_EOL;
-
-// For now, we will have such output:
-/*
-Show page: 1
-a
-b
-c
-
-*/
-
-// Now we go to next page
-
-$currentPage = 2;
-$pagination  = new Pagination($total, $perPage, $currentPage);
-
-echo "Show page: {$pagination->getCurrentPage()}".PHP_EOL;
-
-$i = $pagination->getStart();
-
-while($i <= $pagination->getEnd()){
-    $index = $i-1;
-
-    echo $items[$index].PHP_EOL;
-
-    $i++;
-}
-
-//For now, we will have total output:
-/*
-Show page: 1
-a
-b
-c
-
-Show page: 2
-d
-e
-
-*/
-
 ```
 
-<a name="some-implementation-details"/>
+```php
+//page 2
 
-### Some implementation details
+pagination {
+  total              : 5
+  perPage            : 3
+  totalPages         : 2
+  currentPage        : 2
+  isStartPage        : false
+  isEndPage          : true
+  totalOnCurrentPage : 2
+  start              : 4
+  end                : 5
+}
+```
+
+See [Full get started example](#full-get-started-example) with real working code.
+
+<a name="implementation-details"/>
+
+### Implementation details
 - Pagination can have no items
 - Pagination always has at least 1 page (even if there is no items)
 - Fields of pagination object stores the data about all the set and the current page. See reference.
-- If pagination can't constructed than Exception will be thrown. For example, if we try to use currentPage that is greater than maximum available page number
+- If pagination can't be constructed - Exception will be thrown. For example, if we try to use currentPage that is greater than maximum available page number
 
-<a name="installation"/>
+<a name="install"/>
 
-## Installation
+## Install
 
 ```bash
 composer require hutulia/pagination
@@ -279,13 +223,107 @@ object(stdClass)#4 (9) {
 */
 ```
 
+<a name="full-get-started-example"/>
+
+### Example 4: Full get started example
+
+This is a full example of [Get Started Example](#get-started-example).
+
+```php
+<?php
+
+use Hutulia\Pagination\Pagination;
+
+require_once 'vendor/autoload.php';
+
+$items       = ['a', 'b', 'c', 'd', 'e'];
+$total       = count($items);
+$perPage     = 3;
+$currentPage = 1;
+$pagination  = new Pagination($total, $perPage, $currentPage);
+
+//var_dump($pagination);
+
+/*
+Output is simplified:
+
+object {
+  total              : 5
+  perPage            : 3
+  totalPages         : 2
+  currentPage        : 1
+  isStartPage        : true
+  isEndPage          : false
+  totalOnCurrentPage : 3
+  start              : 1
+  end                : 3
+}
+*/
+
+// Now $pagination has all needed information and we can display page 1 some like this:
+
+echo "Show page: {$pagination->getCurrentPage()}".PHP_EOL;
+
+$i = $pagination->getStart();
+
+while($i <= $pagination->getEnd()){
+    $index = $i-1;
+
+    echo $items[$index].PHP_EOL;
+
+    $i++;
+}
+
+echo PHP_EOL;
+
+// For now, we will have such output:
+/*
+Show page: 1
+a
+b
+c
+
+*/
+
+// Now we go to next page
+
+$currentPage = 2;
+$pagination  = new Pagination($total, $perPage, $currentPage);
+
+echo "Show page: {$pagination->getCurrentPage()}".PHP_EOL;
+
+$i = $pagination->getStart();
+
+while($i <= $pagination->getEnd()){
+    $index = $i-1;
+
+    echo $items[$index].PHP_EOL;
+
+    $i++;
+}
+
+//For now, we will have total output:
+/*
+Show page: 1
+a
+b
+c
+
+Show page: 2
+d
+e
+
+*/
+
+```
+
 <a name="reference"/>
 
 ## Reference
 
 <a name="reference-pagination"/>
 
-### Pagination
+### Hutulia\Pagination\Pagination
 
 <a name="reference-pagination-properties"/>
 
@@ -326,9 +364,11 @@ Used during construct but can be used after (they do not change the object)
 
 <a name="reference-simplerenderer-api"/>
 
-### SimpleRenderer API
+### Hutulia\Pagination\SimpleRenderer
 
-#### render(string $template): string
+#### API
+
+##### render(string $template): string
 
 It uses a template (plain string) and vars. To use var just wrap it with curly braces.
 Example: `some text {START} some other text {TOTAL} ... `.
@@ -349,9 +389,11 @@ Available vars:
 
 <a name="reference-exporter-to-plain-object-api"/>
 
-### ExporterToPlainObject API
+### Hutulia\Pagination\ExporterToPlainObject
 
-#### export(): stdClass
+#### API
+
+##### export(): stdClass
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
