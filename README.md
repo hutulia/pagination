@@ -192,7 +192,6 @@ echo $pagination->render($template);
 ### Example 3: Export To Plain Object
 
 ```php
-
 <?php
 
 use Hutulia\Pagination\Pagination;
@@ -207,6 +206,10 @@ $pagination            = new Pagination($total, $perPage, $currentPage);
 $exporterToPlainObject = new ExporterToPlainObject($pagination);
 
 var_dump($exporterToPlainObject->export());
+
+//Or without Exporter - will produce the same output
+
+//var_dump($pagination->toPlainObject());
 
 /*
 object(stdClass)#4 (9) {
@@ -372,6 +375,7 @@ Used during construct but can be used after (they do not change the object)
 - calcEnd()
 
 <a name="reference-simplerenderer-api"/>
+
 
 ### Hutulia\Pagination\SimpleRenderer
 

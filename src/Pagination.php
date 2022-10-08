@@ -197,6 +197,13 @@ class Pagination
     }
 
     /**
+     * @return \stdClass
+     */
+    public function toPlainObject(){
+        return (new ExporterToPlainObject($this))->export();
+    }
+
+    /**
      * @return $this
      * @throws Exception
      */
