@@ -1,5 +1,9 @@
 # Hutulia/Pagination
 
+| Input | Output |Pagination object for page 1 | Pagination object for page 2 |
+| :-------- | :------- | :------------------------- | :------------------------- |
+| <pre>['a', 'b', 'c', 'd', 'e']</pre>|<pre>Show page: 1<br>a<br>b<br>c<br><br>Show page: 2<br>d<br>e<br><br></pre>|<pre>object {<br>  total              : 5<br>  perPage            : 3<br>  totalPages         : 2<br>  currentPage        : 1<br>  isStartPage        : true<br>  isEndPage          : false<br>  totalOnCurrentPage : 3<br>  start              : 1<br>  end                : 3<br>}</pre>|<pre>object {<br>  total              : 5<br>  perPage            : 3<br>  totalPages         : 2<br>  currentPage        : 2<br>  isStartPage        : false<br>  isEndPage          : true<br>  totalOnCurrentPage : 2<br>  start              : 4<br>  end                : 5<br>}</pre>|
+
 <a name="table-of-contents"/>
 
 ## Table of contents
