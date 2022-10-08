@@ -111,7 +111,7 @@ See [Full get started example](#full-get-started-example) with real working code
 - Pagination can have no items
 - Pagination always has at least 1 page (even if there is no items)
 - Items numbers starting from 1
-- Fields of pagination object stores the data about all the set and the current page. [See reference](#reference).
+- Fields of pagination object stores the data about all the set and the current page. [See Pagination Properties reference](#reference-pagination-properties).
 - If pagination can't be constructed - Exception will be thrown. For example, if we try to use currentPage that is greater than maximum available page number
 
 <a name="install"/>
